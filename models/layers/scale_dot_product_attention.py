@@ -22,9 +22,18 @@ class ScaleDotProductAttention(nn.Module):
         k_t = k.transpose(2, 3) # transpose 
         score = (q @ k_t) / math.sqrt(d_tensor) # scaled dot product 
 
-        # 2. apply masking (opt)
+        # 2. apply masking (opt) => mask is a tensor that has same size of score matrix
         if mask is not None: 
             score = score.masked_fill(mask == 0, -10000)
+        """
+            score = torch.tensor([[0.1, 0.3, 0.2],
+                      [0.5, 0.1, 0.4]])
+            mask = torch.tensor([[1, 0, 1],
+                     [1, 1, 0]])
+            masked_score = score.masked_fill(mask == 0, -10000)
+            # tensor([[0.1, -10000.0, 0.2],
+            #         [0.5, 0.1, -10000.0]])
+        """
 
         # 3. pass them softmax to make [0, 1] range
         score = self.softmax(score)

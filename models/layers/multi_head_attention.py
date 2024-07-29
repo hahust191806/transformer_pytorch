@@ -20,7 +20,7 @@ class MultiHeadAttention(nn.Module):
         q, k, v = self.w_q(q), self.w_k(k), self.w_v(v)
 
         # 2. split tensor by number of heads
-        q, k, v = self.split(q), self.split(k), self.split(v)
+        q, k, v = self.split(q), self.split(k), self.split(v) #q, k, v có kích thước: (batch_size, head, length, d_tensor) 
 
         # 3. do scale dot product to compute similarity
         out, attention = self.attention(q, k, v, mask=mask)

@@ -32,4 +32,4 @@ class EncoderLayer(nn.Module):
         # 4. add and norm
         x = self.dropout2(x)
         x = self.norm2(x + _x)
-        return x
+        return x # kích thước của x -> (batch_size, )
