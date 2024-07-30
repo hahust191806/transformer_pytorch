@@ -23,6 +23,10 @@ class TransformerEmbedding(nn.Module):
         self.drop_out = nn.Dropout(p=drop_prob)
 
     def forward(self, x):
+        """
+            Input: Tensor có kích thước: [num_sample, seq_len]
+            Output: Tensor trả về có kích thước: [num_sample, seq_len, d_model]
+        """
         tok_emb = self.tok_emb(x)
         pos_emb = self.pos_emb(x)
         

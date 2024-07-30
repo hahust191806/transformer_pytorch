@@ -21,6 +21,9 @@ class Encoder(nn.Module):
                                      for _ in range(n_layers)])
 
     def forward(self, x, src_mask):
+        """
+            Input x: có kích thước [num_sample, seq_len], src_mask: [num_sample, seq_len]
+        """
         x = self.emb(x)
 
         for layer in self.layers:
